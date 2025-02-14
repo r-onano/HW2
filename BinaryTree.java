@@ -250,8 +250,19 @@ public class BinaryTree {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
+        int minValue = Integer.MAX_VALUE;
 
-        return Integer.MAX_VALUE;
+        if (node == null) {
+            minValue = Integer.MAX_VALUE;
+        } else {
+            int leftMin = findMinHelper(node.left);
+            int rightMin = findMinHelper(node.right);
+            minValue = Math.min(node.data, Math.min(leftMin, rightMin));
+        }
+
+        return minValue;
+
+        // return Integer.MAX_VALUE;
     }
 
     /*
