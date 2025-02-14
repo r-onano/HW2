@@ -225,10 +225,16 @@ public class BinaryTree {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
+
+        // If current node is null, return, hence preventing null pointer exceptions
         if (node != null) {
+            // Check if current node matches old value
             if (node.data == oldVal) {
+                // Replace old value with the new one.
                 node.data = newVal;
             }
+            // Using recursion, call the function of the left and right subtrees and replace
+            // values
             replaceValueHelper(node.left, oldVal, newVal);
             replaceValueHelper(node.right, oldVal, newVal);
         }
@@ -253,13 +259,18 @@ public class BinaryTree {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
+
+        // Initialize minValue to the largest possible integer value
         int minValue = Integer.MAX_VALUE;
 
+        // If null, return the maxvalue to avoid affecting the minimum process.
         if (node == null) {
             minValue = Integer.MAX_VALUE;
         } else {
+            // Usin recursion find left and right minimum subtree values
             int leftMin = findMinHelper(node.left);
             int rightMin = findMinHelper(node.right);
+            // Calculate min value
             minValue = Math.min(node.data, Math.min(leftMin, rightMin));
         }
 
@@ -287,12 +298,18 @@ public class BinaryTree {
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
         // return -1; // RECALL, IF TREE IS EMPTY, RETURN -1
+
+        // Intialize count to 0 to store count of nodes greater than val
         int count = 0;
 
+        // If the node is null return 0 because there are no nodes to count.
         if (node == null) {
             count = 0;
         } else {
+            // If current node is greater than given value, increment counter, otherwise 0
             count = (node.data > val) ? 1 : 0;
+            //// Using recursion count nodes in left and right subtree whose value is
+            //// greater than val
             count += nodesGTHelper(node.left, val);
             count += nodesGTHelper(node.right, val);
         }
@@ -338,13 +355,16 @@ public class BinaryTree {
         // COUNT LOCATIONS IN THE RETURNED ARRAY AS SHOWN BELOW, ELSE
         // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
 
-        // result[0] = sum, result[1] = count
+        // Create array to store sum and count of nodes
         int[] result = new int[2];
 
+        // If node is null or empty subtree return 0,0
         if (node == null) {
+            // The sum amd the count stays 0
             result[0] = 0;
             result[1] = 0;
         } else {
+            // Using recursion, caluclate sum and count of left and right subtrees
             int[] leftData = averageHelper(node.left);
             int[] rightData = averageHelper(node.right);
             // Sum
@@ -352,6 +372,7 @@ public class BinaryTree {
             // Count
             result[1] = 1 + leftData[1] + rightData[1];
         }
+        // Return array with total sum and total count of nodes
         return result;
 
         // return new int[] { 0, 0 };
